@@ -616,7 +616,7 @@ const saveAsHtml = async ({ page, filePath, options, route, fs }) => {
     if (title.includes("404"))
       console.log(`⚠️  warning: page not found ${route}`);
     mkdirp.sync(filePath);
-    fs.writeFileSync(path.join(filePath, "index.html"), minifiedContent);
+    fs.writeFileSync(path.join(filePath, "index.html"), minifiedContent?.replaceAll('/static/css', ''));
   }
 };
 
