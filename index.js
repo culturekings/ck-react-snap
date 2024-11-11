@@ -605,13 +605,13 @@ const saveAsHtml = async ({ page, filePath, options, route, fs }) => {
   const minifiedContent = options.minifyHtml
     ? minify(content, options.minifyHtml)
     : content;
-  console.info(minifiedContent)
+  console.info( minifiedContent?.replaceAll('/static/css', ''))
   filePath = filePath.replace(/\//g, path.sep);
   if (route.endsWith(".html")) {
     if (route.endsWith("/404.html") && !title.includes("404"))
       console.log('⚠️  warning: 404 page title does not contain "404" string');
     mkdirp.sync(path.dirname(filePath));
-    fs.writeFileSync(filePath, minifiedContent);
+    fs.writeFileSync(filePath,  minifiedContent?.replaceAll('/static/css', ''));
   } else {
     if (title.includes("404"))
       console.log(`⚠️  warning: page not found ${route}`);
